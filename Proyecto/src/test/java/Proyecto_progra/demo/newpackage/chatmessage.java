@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ChatMessage")
 @Data
-public class chatmessage {
+public class ChatMessage {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Corresponde a 'id' en MySQL 
@@ -28,9 +29,10 @@ public class chatmessage {
     @Column(name = "sender", nullable = false)
     @Enumerated(EnumType.STRING)
     private SenderType sender; // Corresponde a 'sender' en MySQL 
-
-    @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime timestamp; // Corresponde a 'timestamp' en MySQL 
+ 
+    
+   // @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+   // private LocalDateTime timestamp; // Corresponde a 'timestamp' en MySQL 
 
     public enum SenderType {
         USER, BOT
