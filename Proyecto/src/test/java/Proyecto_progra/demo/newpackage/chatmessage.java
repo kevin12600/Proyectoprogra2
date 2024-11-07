@@ -8,9 +8,10 @@ package Proyecto_progra.demo.newpackage;
  *
  * @author DELL LATITUDE 5401
  */
+import Proyecto_progra.demo.Test.User;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "ChatMessage")
@@ -33,7 +34,12 @@ public class ChatMessage {
     
    // @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
    // private LocalDateTime timestamp; // Corresponde a 'timestamp' en MySQL 
-
+ 
+     // Relación ManyToOne con User
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    
     public enum SenderType {
         USER, BOT
     }

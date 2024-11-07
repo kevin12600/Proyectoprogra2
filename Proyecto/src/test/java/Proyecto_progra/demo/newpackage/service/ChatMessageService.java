@@ -6,6 +6,7 @@ package Proyecto_progra.demo.newpackage.service;
 
 import Proyecto_progra.demo.newpackage.ChatMessage;
 import Proyecto_progra.demo.newpackage.repository.ChatMessageRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class ChatMessageService {
      @Autowired
     private ChatMessageRepository chatMessageRepository;
-
+@Transactional
     public ChatMessage saveMessage(ChatMessage chatMessage) {
         return chatMessageRepository.save(chatMessage);
     }
