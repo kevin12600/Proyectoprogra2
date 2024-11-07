@@ -4,8 +4,6 @@
  */
 package Proyecto_progra.demo.newpackage;
 
-
-
 import Proyecto_progra.demo.Test.User;
 import Proyecto_progra.demo.newpackage.repository.UserReposity;
 import Proyecto_progra.demo.newpackage.service.ChatMessageService;
@@ -16,10 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author DELL LATITUDE 5401
- */
 @Component
 public class PruebaConexion implements CommandLineRunner {
     
@@ -30,31 +24,58 @@ public class PruebaConexion implements CommandLineRunner {
     @Autowired
     private UserReposity userReposity;
 
-
     @Override
     public void run(String... args) {
         try (Connection connection = dataSource.getConnection()) {
-            System.out.println("Conexion a la base de datos establecida con exito.");
+            System.out.println("Conexión a la base de datos establecida con éxito.");
         
-               // Crear y guardar una instancia del Usuario
-            User user = new User();
-            user.setName("Carlos");
-            user.setUsername("Charls");
-            user.setChatId(1023L);
-            user = userReposity.save(user); // Guarda el usuario en la base de datos
+            // Crear y guardar los usuarios
+            User user1 = new User();
+            user1.setName("Dan");
+            user1.setUsername("Char");
+            user1.setChatId(1025L);
+            user1 = userReposity.save(user1); 
+            System.out.println("Usuario 1 guardado con ID: " + user1.getId());
 
-            System.out.println("Usuario guardado con ID: " + user.getId());
+            User user2 = new User();
+            user2.setName("Ana");
+            user2.setUsername("Anita");
+            user2.setChatId(1026L);
+            user2 = userReposity.save(user2); 
+            System.out.println("Usuario 2 guardado con ID: " + user2.getId());
 
-            // Crear y configurar una instancia de ChatMessage asociada al User
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setChatId(1010L); // Establece el ID del chat
-            chatMessage.setMessage("Mensaje guardado."); // Contenido del mensaje
-            chatMessage.setSender(ChatMessage.SenderType.USER); // Establece el remitente
-            chatMessage.setUser(user); // Asigna el usuario al mensaje
+            User user3 = new User();
+            user3.setName("Luis");
+            user3.setUsername("Lucho");
+            user3.setChatId(1027L);
+            user3 = userReposity.save(user3); 
+            System.out.println("Usuario 3 guardado con ID: " + user3.getId());
 
-            // Guardar el mensaje en la base de datos
-            chatMessageService.saveMessage(chatMessage);
-            System.out.println("Mensaje guardado en la base de datos.");
+            //  Configurar los mensajes para cada usuario
+            ChatMessage chatMessage1 = new ChatMessage();
+            chatMessage1.setChatId(1025L); 
+            chatMessage1.setMessage("Mensaje para Dan");
+            chatMessage1.setSender(ChatMessage.SenderType.USER); 
+            chatMessage1.setUser(user1); 
+
+            ChatMessage chatMessage2 = new ChatMessage();
+            chatMessage2.setChatId(1026L); 
+            chatMessage2.setMessage("Mensaje para Ana"); 
+            chatMessage2.setSender(ChatMessage.SenderType.USER); 
+            chatMessage2.setUser(user2); 
+
+            ChatMessage chatMessage3 = new ChatMessage();
+            chatMessage3.setChatId(1027L); 
+            chatMessage3.setMessage("Mensaje para Luis"); 
+            chatMessage3.setSender(ChatMessage.SenderType.USER); 
+            chatMessage3.setUser(user3); 
+
+            // Guardar los mensajes en la base de datos
+            chatMessageService.saveMessage(chatMessage1);
+            chatMessageService.saveMessage(chatMessage2);
+            chatMessageService.saveMessage(chatMessage3);
+
+            System.out.println("Mensajes guardados en la base de datos.");
             
         } catch (SQLException e) {
             System.err.println("Error al conectar a la base de datos: " + e.getMessage());
@@ -64,7 +85,3 @@ public class PruebaConexion implements CommandLineRunner {
         }
     }
 }
-
-
-
-
